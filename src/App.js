@@ -1,6 +1,5 @@
 import "./App.css";
 import Sidebar from "./components/Sidebar.jsx";
-import Workspace from "./components/Workspace.jsx";
 function App() {
   return (
     <div className="App">

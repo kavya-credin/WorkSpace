@@ -6,12 +6,13 @@ import { useEffect, useRef } from "react";
 function Sidebar() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [droppedForms, setDroppedForms] = useState([]);
-  const handleDrop = (e) => {
+  const handleDrop = (item, e) => {
+    // console.log(item);
     e.preventDefault();
     const form = formCreate();
     setDroppedForms((prevForms) => [
       ...prevForms,
-      { form, x: e.clientX, y: e.clientY },
+      { form, x: e.clientX, y: e.clientY, item },
     ]);
 
     setPosition({
@@ -19,6 +20,7 @@ function Sidebar() {
       y: e.clientY,
     });
   };
+  console.log(droppedForms);
 
   const handleDrag = (e) => {
     e.preventDefault();
@@ -27,7 +29,7 @@ function Sidebar() {
     e.preventDefault();
   };
 
-  const handleBoxDrop = (item) => {};
+  const handleBoxDrop = () => {};
 
   return (
     <div className={styles.main}>
@@ -38,7 +40,7 @@ function Sidebar() {
             key={item.id}
             draggable
             onDrag={handleDrag}
-            onDragEnd={handleDrop}
+            onDragEnd={(e) => handleDrop(item, e)}
           >
             {item.value}
           </div>
@@ -69,6 +71,7 @@ function Sidebar() {
             onDrag={handleBoxDrag}
             onDragEnd={handleBoxDrop}
           >
+            {item.item.value}
             {item.form}
           </div>
         ))}
