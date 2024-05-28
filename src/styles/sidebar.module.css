@@ -35,6 +35,60 @@ main {
 
 }
 
+
+.workFlowSeq{
+  background-color: #ECF2FF;
+  width:270px;
+  position: absolute;
+  right: 0;
+  left: 310px;
+  top: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* height: 90vh; */
+  max-height: 100vh;
+  
+} 
+.workFlowSeq h3{
+  margin-bottom: 2px;
+}
+
+
+
+.droppedForms{
+  display: flex;
+  /* background-color: rebeccapurple; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 100%;
+  margin-top: 0px;
+  margin-bottom: 10px;
+}
+
+
+
+
+.droppedForms_item{
+  background-color: white;
+  width:90%;
+  border-radius: 10px;
+  /* border:1px solid black; */
+  color:#1B2A49;
+  padding: 2px 4px;
+}
+.droppedForms_item h2{
+margin: 0px;
+padding: 0px;
+
+}
+.droppedForms_item p{
+  margin: 0px;
+  padding: 0px;
+}
 .form {
 }
 
@@ -44,4 +98,5 @@ main {
   right: 0;
   left: 295px;
   top: 0; */
+  background-color: pink;
 }

@@ -4,32 +4,30 @@ import styles from "../styles/sidebar.module.css";
 import { useEffect, useRef } from "react";
 
 function Sidebar() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
   const [droppedForms, setDroppedForms] = useState([]);
+  const [activeButton, setActiveButton] = useState(null);
   const handleDrop = (item, e) => {
-    // console.log(item);
     e.preventDefault();
-    const form = formCreate();
-    setDroppedForms((prevForms) => [
-      ...prevForms,
-      { form, x: e.clientX, y: e.clientY, item },
+    setDroppedForms((prevItems) => [
+      ...prevItems,
+      { item, nextPossibleArray: [], index: prevItems.length },
     ]);
-
-    setPosition({
-      x: e.clientX,
-      y: e.clientY,
-    });
   };
-  console.log(droppedForms);
+  // console.log(droppedForms);
 
   const handleDrag = (e) => {
     e.preventDefault();
   };
-  const handleBoxDrag = (e) => {
-    e.preventDefault();
+
+  const addSubItem = (item) => {
+    if (activeButton == null) {
+      setActiveButton(item);
+    } else {
+      console.log("already one active button");
+    }
   };
 
-  const handleBoxDrop = () => {};
+  console.log(activeButton);
 
   return (
     <div className={styles.main}>
@@ -46,56 +44,24 @@ function Sidebar() {
           </div>
         ))}
       </div>
-      <div className={styles.workSpace_div}>
-        <h1>Define WorkFlow Here</h1>
-        {droppedForms.map((item, index) => (
-          <div
-            key={index}
-            style={{
-              position: "absolute",
-              top: item.y,
-              left: item.x,
-              zIndex: 1000,
-              backgroundColor: "#e96666",
-              width: "280px",
-              boxShadow: "2px 2px 5px 0px rgba(89, 89, 89, 0.75)",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "space-between",
-              padding: "10px",
-              borderRadius: "5px",
-              cursor: "grab",
-            }}
-            draggable
-            onDrag={handleBoxDrag}
-            onDragEnd={handleBoxDrop}
-          >
-            {item.item.value}
-            {item.form}
+
+      {droppedForms.length > 0 && (
+        <div className={styles.workFlowSeq}>
+          <h3>Our Flow</h3>
+          <div className={styles.droppedForms}>
+            {droppedForms.map((item, index) => (
+              <div key={index} className={styles.droppedForms_item}>
+                <p>{index}</p>
+                {console.log(index)}
+                <p>{item.item.value}</p>
+                <button onClick={() => addSubItem(item)}>➕</button>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
 
 export default Sidebar;
-
-const formCreate = () => {
-  return (
-    <form>
-      <div>
-        <label htmlFor="title">Title</label>
-        <input type="text" id="title" name="title" />
-      </div>
-      <div>
-        <label htmlFor="name">Name</label>
-        <input type="text" id="name" name="name" />
-      </div>
-      <div>
-        <button type="submit">Submit</button>
-      </div>
-    </form>
-  );
-};
