@@ -33,10 +33,10 @@ main {
   font-size: 14px;
 }
 
-.workFlowSeq{
-  background-color: #ECF2FF;
+.workFlowSeq {
+  background-color: #ecf2ff;
   min-width: 280px;
-  width:fit-content;
+  width: fit-content;
   position: absolute;
   right: 0;
   left: 310px;
@@ -45,13 +45,12 @@ main {
   overflow-x: hidden;
   max-height: 100vh;
   padding: 0px 10px;
-  
-} 
-.workFlowSeq h2{
+}
+.workFlowSeq h2 {
   margin-bottom: 2px;
 }
 
-.droppedForms{
+.droppedForms {
   display: flex;
   display: flex;
   flex-direction: column;
@@ -64,14 +63,11 @@ main {
   margin-bottom: 10px;
 }
 
-
-
-
-.droppedForms_item{
+.droppedForms_item {
   background-color: white;
-  min-width:90%;
+  min-width: 90%;
   border-radius: 10px;
-  color:#1B2A49;
+  color: #1b2a49;
   padding: 2px 4px;
   display: flex;
   flex-direction: column;
@@ -79,37 +75,33 @@ main {
   align-items: center;
   gap: 10px;
 }
-.droppedForms_item h2{
-margin: 0px;
-padding: 0px;
-
-}
-.droppedForms_item p{
+.droppedForms_item h2 {
   margin: 0px;
   padding: 0px;
 }
-.form {
+.droppedForms_item p {
+  margin: 0px;
+  padding: 0px;
 }
 
-.main_droppedItems{
+.main_droppedItems {
   display: flex;
   flex-direction: row;
 }
-.subItemsAdding{
+.subItemsAdding {
   display: flex;
   flex-direction: column;
   gap: 5px;
-
 }
-.subItems{
+.subItems {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap:2.5px;
+  gap: 2.5px;
   justify-content: space-between;
 }
-.subItem{
-  background-color: #C4E4FF;
+.subItem {
+  background-color: #c4e4ff;
   border-radius: 5px;
   white-space: nowrap;
   padding: 0px 5px;
@@ -118,29 +110,45 @@ padding: 0px;
   background-color: rgb(188, 53, 75);
 }
 
-.btn{
- background-color: #1B2A49;
- padding:2px 8px;
- border-radius: 5px;
- border: none;
- color: white;
- font-size: 25px;
- font-weight: 800;
- outline: none;
-margin-bottom: 10px;
+.btn {
+  background-color: #1b2a49;
+  padding: 2px 8px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  font-size: 25px;
+  font-weight: 800;
+  outline: none;
+  margin-bottom: 10px;
 }
-.Crossbtn{
-  background-color: #1B2A49;
- padding:4px 10px;
- border-radius: 5px;
- border: none;
- color: white;
- font-size: 18px;
- font-weight: 800;
- outline: none;
-margin-bottom: 10px;
+.Crossbtn {
+  background-color: #1b2a49;
+  padding: 4px 10px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: 800;
+  outline: none;
+  margin-bottom: 10px;
 }
-.buttonsDiv{
+.buttonsDiv {
   display: flex;
-gap:10px;
+  gap: 10px;
+}
+
+.subItemsPage {
+  background-color: #c9d7dd;
+  padding: 10px;
+  margin-left: 330px;
+  margin-right: 40px;
+}
+
+.CrossSubItembtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  font-size: 20px;
+  color: #1b2a49;
 }

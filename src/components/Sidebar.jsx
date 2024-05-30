@@ -19,7 +19,6 @@ function Sidebar() {
             );
             if (isAlreadyPresent) {
               toast.warn("Already present");
-              console.log("already present");
               return form;
             } else {
               return {
@@ -37,7 +36,6 @@ function Sidebar() {
       );
       if (isDuplicateInDroppedForms) {
         toast.info("Already present in droppedForms");
-        console.log("already present in droppedForms");
       } else {
         setDroppedForms((prevItems) => [
           ...prevItems,
@@ -48,7 +46,6 @@ function Sidebar() {
   };
 
   const handleRemoveDroppedItems = (index) => {
-    // console.log(index);
     setDroppedForms((prevItems) =>
       prevItems
         .filter((item) => item.index !== index)
@@ -63,7 +60,6 @@ function Sidebar() {
   const handleSave = () => {
     setActiveButton(null);
   };
-  // console.log(droppedForms);
   const addSubItem = (item) => {
     if (activeButton == null) {
       setActiveButton(item);
@@ -143,12 +139,7 @@ function Sidebar() {
 
       {activeButton != null && (
         <div
-          style={{
-            backgroundColor: "#C9D7DD",
-            padding: "10px",
-            marginLeft: "330px",
-            marginRight: "40px",
-          }}
+         className={styles.subItemsPage}
         >
           {droppedForms.map((item, index) =>
             index === activeButton.index ? (
@@ -167,14 +158,7 @@ function Sidebar() {
                       <div>
                       <button
                       onClick={() => handleRemoveNextPossibleItems( index,subIndex)}
-                      style={{
-                        backgroundColor:"transparent",
-                        border: "none",
-                        cursor: "pointer",
-                        outline: "none",
-                        fontSize: "20px",
-                        color: "#1B2A49",
-                      }}
+                      className={styles.CrossSubItembtn}
                     >
                       <RxCross1 />
                     </button>
