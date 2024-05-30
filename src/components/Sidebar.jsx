@@ -3,6 +3,8 @@ import { status } from "../Data/data.js";
 import styles from "../styles/sidebar.module.css";
 import { IoAddOutline } from "react-icons/io5";
 import { AiFillFolderAdd } from "react-icons/ai";
+import { RxCross1 } from "react-icons/rx";
+import {toast} from "react-toastify"
 function Sidebar() {
   const [droppedForms, setDroppedForms] = useState([]);
   const [activeButton, setActiveButton] = useState(null);
@@ -16,6 +18,7 @@ function Sidebar() {
               (nextItem) => nextItem.id === item.id
             );
             if (isAlreadyPresent) {
+              toast.warn("Already present");
               console.log("already present");
               return form;
             } else {
@@ -33,6 +36,7 @@ function Sidebar() {
         (form) => form.item.id === item.id
       );
       if (isDuplicateInDroppedForms) {
+        toast.info("Already present in droppedForms");
         console.log("already present in droppedForms");
       } else {
         setDroppedForms((prevItems) => [
@@ -43,6 +47,15 @@ function Sidebar() {
     }
   };
 
+  const handleRemoveDroppedItems = (index) => {
+    // console.log(index);
+    setDroppedForms((prevItems) =>
+      prevItems
+        .filter((item) => item.index !== index)
+        .map((item, idx) => ({ ...item, index: idx }))
+    );
+    toast.success("Item removed successfully");
+  };
   const handleDrag = (e) => {
     e.preventDefault();
   };
@@ -50,7 +63,7 @@ function Sidebar() {
   const handleSave = () => {
     setActiveButton(null);
   };
-  console.log(droppedForms);
+  // console.log(droppedForms);
   const addSubItem = (item) => {
     if (activeButton == null) {
       setActiveButton(item);
@@ -58,6 +71,23 @@ function Sidebar() {
       console.log("already one active button");
     }
   };
+  const handleRemoveNextPossibleItems = (index,subIndex) => {
+   setDroppedForms((prevItems) => {
+    return prevItems.map((item) => {
+      if (item.index === index) {
+        return {
+          ...item,
+          nextPossibleArray: item.nextPossibleArray.filter(
+            (subItem, subIdx) => subIdx !== subIndex
+          ),
+        };
+      } else {
+        return item;
+      }
+    });
+   })
+   toast.success("Item removed successfully")
+  }
 
   return (
     <div className={styles.main}>
@@ -80,7 +110,7 @@ function Sidebar() {
           <h2>Our Flow</h2>
           <div className={styles.droppedForms}>
             {droppedForms.map((item, index) => (
-              <>
+              
                 <div key={index} className={styles.droppedForms_item}>
                   <h3>{item.item.value}</h3>
                   <div className={styles.subItems}>
@@ -90,10 +120,22 @@ function Sidebar() {
                       </div>
                     ))}
                   </div>
-
-                  <button onClick={() => addSubItem(item)} className={styles.btn}><IoAddOutline /></button>
+                  <div className={styles.buttonsDiv}>
+                    <button
+                      onClick={() => addSubItem(item)}
+                      className={styles.btn}
+                    >
+                      <IoAddOutline />
+                    </button>
+                    <button
+                      onClick={() => handleRemoveDroppedItems(index)}
+                      className={styles.Crossbtn}
+                    >
+                      <RxCross1 />
+                    </button>
+                  </div>
                 </div>
-              </>
+              
             ))}
           </div>
         </div>
@@ -112,12 +154,31 @@ function Sidebar() {
             index === activeButton.index ? (
               <div key={index} className={styles.droppedForms_item}>
                 <h3>{item.item.value}</h3>
-                <button onClick={handleSave} className={styles.btn}><AiFillFolderAdd /></button>
+                <button onClick={handleSave} className={styles.btn}>
+                  <AiFillFolderAdd />
+                </button>
                 <div className={styles.subItemsAdding}>
                   {item.nextPossibleArray.map((subItem, subIndex) => (
-                    <div key={subIndex} className={styles.subItem}>
-                      <p>{subIndex}</p>
-                      <p>{subItem.value}</p>
+                    <div key={subIndex} style={{ display: "flex" , gap:"25px", alignItems:"center", justifyContent:"space-between"}}>
+                      <div key={subIndex} className={styles.subItem}>
+                        <p>{subIndex}</p>
+                        <p>{subItem.value}</p>
+                      </div>
+                      <div>
+                      <button
+                      onClick={() => handleRemoveNextPossibleItems( index,subIndex)}
+                      style={{
+                        backgroundColor:"transparent",
+                        border: "none",
+                        cursor: "pointer",
+                        outline: "none",
+                        fontSize: "20px",
+                        color: "#1B2A49",
+                      }}
+                    >
+                      <RxCross1 />
+                    </button>
+                      </div>
                     </div>
                   ))}
                 </div>
